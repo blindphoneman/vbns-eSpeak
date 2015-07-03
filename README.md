@@ -1,6 +1,10 @@
 # vbns-eSpeak
 This is a braille N'Speak emulator, which works with MS-DOS screen readers. It was originally created by [Tyler Spivey](https://www.allinaccess.com), and modified by Sukil Etxenike. [Here is the original version](http://batsupport.com/unsupported/dosbox/vbns.zip).
 
+There are two versions of this project:
+* This one which, as the original version, uses eSpeak as output.
+* And [one which can interact with many Windows screen readers and SAPI](https://github.com/sukiletxe/vbns-ao2).
+
 ## Modifications
 * Added the option to select by voice name rather than by language, allowing selection of variants.
 * Used argparse instead of sys.argv[n], to include help in the commands.
