@@ -1,12 +1,14 @@
 # vbns-eSpeak
-This is a braille N'Speak emulator, which works with MS-DOS screen readers. It was originally created by [Tyler Spivey](https://www.allinaccess.com), and modified by Sukil Etxenike. [Here is the original version](http://batsupport.com/unsupported/dosbox/vbns.zip).
 
+## Introduction
+This is a braille N'Speak emulator, which works with MS-DOS screen readers. It was originally created by [Tyler Spivey](https://www.allinaccess.com), and modified by Sukil Etxenike. [Here is the original version](http://batsupport.com/unsupported/dosbox/vbns.zip).
+## Variants
 There are two versions of this project:
 * This one which, as the original version, uses eSpeak as output.
 * And [one which can interact with many Windows screen readers and SAPI](https://github.com/sukiletxe/vbns-ao2).
 
-## Modifications
-* Added the option to select by voice name rather than by language, allowing selection of variants.
+## Modifications until first commit
+* Added the option to select by voice name rather than slecting the default English voice, allowing selection of variants.
 * Used argparse instead of sys.argv[n], to include help in the commands.
 * Added Habla mode.
 
@@ -26,4 +28,4 @@ You will need py2exe to make a compiled executable.
 ## Usage
 Simply specify the portname and the voice in the command line. For example:
 emu com8 en-us+m3
-In addition, if you specify --habla, a mode will be executed where everything received by the emulator will be spoken after 300 milliseconds, instead of waiting for a carriage return. This was made to make a Spanish screen reader called Habla, but for unknown reasons, it failed.
+In addition, if you specify --habla, a mode will be executed where everything received by the emulator will be spoken after 300 milliseconds, instead of waiting for a carriage return. This was made to make the emulator work with a Spanish screen reader called Habla, but for unknown reasons, it failed.
