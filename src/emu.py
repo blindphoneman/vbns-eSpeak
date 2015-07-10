@@ -1,4 +1,4 @@
-import serial, threading, cStringIO, cmd, time
+import serial, threading, cStringIO, cmd
 import string
 import espeak
 rate_map = (80, 100, 120, 140, 160, 180, 200, 240, 260, 290, 320, 350, 370, 390, 400, 450)
