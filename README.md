@@ -29,6 +29,7 @@ Will use the COM8 port (the default in ASAP for talking Dosbox), And the US Engl
 You will need:
 * Python (I use version 2.7.10).
 * Pyserial
+* [7-Zip](http://7-zip.org) to compress the compiled executable using the included batch file.
 
 You will need py2exe to make a compiled executable.
 
