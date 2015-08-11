@@ -1,50 +1,43 @@
-from distutils.core import setup
+from setuptools import setup, find_packages
 import py2exe
 
-import os
-import glob
+import os, platform, fnmatch
+from glob import glob
+def get_data():
+  if platform.architecture()[0][:2] == "32":
+   return [
+   ("Microsoft.VC90.CRT", glob("windows_vc++/msvc32/Microsoft.VC90.CRT/*")),
+   ("Microsoft.VC90.MFC", glob("windows_vc++/msvc32/Microsoft.VC90.MFC/*")),]
+  elif platform.architecture()[0][:2] == "64":
+   return [
+   ("Microsoft.VC90.CRT", glob("windows_vc++/msvc64/Microsoft.VC90.CRT/*")),
+   ("Microsoft.VC90.MFC", glob("windows_vc++/msvc64/Microsoft.VC90.MFC/*")),]
 
-def find_data_files(source,target,patterns):
-    """Locates the specified data-files and returns the matches
-    in a data_files compatible format.
+def get_espeak():
+    answer = []
+    tmp = []
+    for root, dirs, files in os.walk("espeak-data"):
+        for item in glob(os.path.join(root, "*")):
+            if os.path.isfile(item):
+                tmp.append(item)
+        new = (root, tmp)
+        tmp = []
+        answer.append(new)
+    answer.append(("", ["espeak.dll"]))
+    return answer
 
-    source is the root of the source data tree.
-        Use '' or '.' for current directory.
-    target is the root of the target data tree.
-        Use '' or '.' for the distribution directory.
-    patterns is a sequence of glob-patterns for the
-        files you want to copy.
-    """
-    if glob.has_magic(source) or glob.has_magic(target):
-        raise ValueError("Magic not allowed in src, target")
-    ret = {}
-    for pattern in patterns:
-        pattern = os.path.join(source,pattern)
-        for filename in glob.glob(pattern):
-            if os.path.isfile(filename):
-                targetpath = os.path.join(target,os.path.relpath(filename,source))
-                path = os.path.dirname(targetpath)
-                ret.setdefault(path,[]).append(filename)
-    return sorted(ret.items())
 setup(
+    name = "Virtual Braille n'Speak emulator",
+    author = "Tyler Spivey, Sukil Etxenike",
+    author_email = "sukiletxe@yahoo.es",
+    version = "1.0",
     console=['emu.py'],
-    zipfile = None,
-    data_files= find_data_files('.','.',[
-        'espeak.dll',
-        'espeak-data/*',
-        'espeak-data/voices/*',
-        'espeak-data/voices/!v/*',
-        'espeak-data/voices/asia/*',
-        'espeak-data/voices/europe/*',
-        'espeak-data/voices/other/*',
-        'espeak-data/voices/test/*',
-    ]),
+    data_files = get_data() + get_espeak() + [("", ["../readme.html"])],
+    packages = find_packages()
     options = {
         "py2exe":{
-            "bundle_files": 1,
-            "includes": ['_espeak', 'espeak', 'nvwave', 'serial'],
-            "ignores": ['FCNTL', 'System', 'System.IO.Ports', 'TERMIOS', 'clr'],
-            "excludes":['_ssl', 'pyreadline', 'difflib', 'doctest', 'locale',  'optparse', 'pickle', 'calendar']
+            "optimize": 2,
+            "compressed": True,
         }
     }
 )

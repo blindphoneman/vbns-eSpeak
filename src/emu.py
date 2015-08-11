@@ -5,7 +5,7 @@ rate_map = (80, 100, 120, 140, 160, 180, 200, 240, 260, 290, 320, 350, 370, 390,
 rate, pitch = 5, 5
 synth=espeak.Synth()
 synth.speak("ready")
-port = serial.serial_for_url(cmd.args.comport, 9600)
+port = serial.serial_for_url(cmd.args.port, 9600)
 port.setDsrDtr(0)
 cmdchar = '\x05'
 buffer = cStringIO.StringIO()
