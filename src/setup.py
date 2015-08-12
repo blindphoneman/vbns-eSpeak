@@ -33,7 +33,7 @@ setup(
     version = "1.0",
     console=['emu.py'],
     data_files = get_data() + get_espeak() + [("", ["../readme.html"])],
-    packages = find_packages()
+    packages = find_packages(),
     options = {
         "py2exe":{
             "optimize": 2,
